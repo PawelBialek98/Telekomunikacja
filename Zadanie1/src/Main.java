@@ -18,14 +18,16 @@ public class Main {
         byte [] kod = file.readFromFile("wiadomosc.txt");
         pojedynczy.BytesToVector(kod);
         pojedynczy.encrypt();
-        //System.out.println(pojedynczy.getT().get(4));
-        //pojedynczy.changeT();
 
+        //pojedynczy.changeT();
+        byte[] wysylka = pojedynczy.VectorToBytes();
         //file.saveToFile(out,"C:\\Users\\Łukasz\\Desktop\\wiadomosc2.txt");
+        file.saveToFile(wysylka,"wiadomoscDoWysylki.txt");
 
         pojedynczy.decrypt();
         byte [] out = pojedynczy.VectorToBytes();
-        file.saveToFile(out,"wiadomosc2.txt");
+        file.saveToFile(out,"wiadomoscOdszyfrowana.txt");
+
 
     }
 }

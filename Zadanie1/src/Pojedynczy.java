@@ -10,16 +10,14 @@ public class Pojedynczy {
                         {1,0,1,1,0,1,0,1,0,0,1,0},
                         {0,1,1,1,1,0,1,1,0,0,0,1}};  //To jeszcze do poprawki ofc
 
-    //private ArrayList<Integer> T = new ArrayList<Integer>();
     private ArrayList<Integer> T = new ArrayList<>();
     private ArrayList<Integer> E = new ArrayList<>();
     private int ArraySize;
-    //private int T[] = new int[8];
 
     private int calculate_C(int r,int k){
         int c = 0;
         for(int i=0;i<8;i++){
-            c += H[r][i] * T.get(k*8+i);
+            c += H[r][i] * T.get(k*12+i);
         }
         c %= 2;
         return c;
@@ -42,12 +40,10 @@ public class Pojedynczy {
                 T.add((k+1)*8+k*4+i, C);
 
             }
-            System.out.println(T);
         }
 
         System.out.println("Zaszyfrowana wiadomosc!: " + T);
         System.out.println("Wysyłam");
-        System.out.println();
     }
 
     private void repair(int k){
@@ -65,7 +61,7 @@ public class Pojedynczy {
                 }
             }
             if(theSame){
-                System.out.println("Znalazłem bład na pozycji: " + k*8+i);
+                System.out.println("Znalazłem bład na pozycji: " + (k*8+i));
                 int bit = T.get(k*8+i);
                 if(bit == 1) bit = 0;
                 else bit = 1;
@@ -84,7 +80,6 @@ public class Pojedynczy {
             for (int i = 0; i < 4; i++) {
                 int c = calculate_C2(i, k);
                 E.add(c);
-                System.out.println("C na pozycji " + i + "  " + c);
                 if (c == 1) blad = true;
             }
 
@@ -93,14 +88,12 @@ public class Pojedynczy {
                 System.out.println("Naprawię go!");
                 repair(k);
             }
-            System.out.println(E);
             E.clear();
 
             for (int i = 0; i < 4; i++) {
                 T.remove((k + 1) * 8);
             }
         }
-        System.out.println(T);
     }
 
     public void changeT(){
@@ -117,10 +110,6 @@ public class Pojedynczy {
             else T.add(1);
         }
         ArraySize = tab.length;
-        System.out.println(tab.length);
-        System.out.println(bity.size());
-        System.out.println(T);
-
     }
 
     public byte[] VectorToBytes(){
