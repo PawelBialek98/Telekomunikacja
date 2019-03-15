@@ -10,7 +10,7 @@ public class Pojedynczy {
                         {0,1,1,1,1,0,1,1,0,0,0,1}};  //To jeszcze do poprawki ofc
 
     //private ArrayList<Integer> T = new ArrayList<Integer>();
-    private ArrayList<Integer> T = new ArrayList<>(Arrays.asList(1, 0, 1, 1, 0, 1, 1, 1));
+    private ArrayList<Integer> T = new ArrayList<>();
     private ArrayList<Integer> E = new ArrayList<>();
     //private int T[] = new int[8];
 
@@ -81,25 +81,28 @@ public class Pojedynczy {
     }
 
     public void changeT(){
-        T.remove(3);
-        T.add(3,0);
+        T.remove(4);
+        T.add(4,1);
     }
 
 
-
-
-
-
-
-    public void stringToInt(String input){
-        int pom = Integer.parseInt(input);
-        int pom2 = 11001110;
-        for(int i=7; i>=0; i--){
-            System.out.println(pom2%10);
-            if(pom2%10 == 0) { T.add(0);}
-            else { T.add(1);}
-            pom2 /= 10;
+    public void BytesToVector(byte[] tab){
+        //ArrayList<Integer> tmp = new ArrayList<>();
+        BitSet bity = BitSet.valueOf(tab);
+        for (int i=0; i<bity.size(); i++){
+            if(!bity.get(i)) T.add(0);
+            else T.add(1);
         }
     }
 
+    public byte[] VectorToBytes(){
+        BitSet bity = new BitSet(T.size());
+        for(int i=0;i<T.size();i++){
+            if(T.get(i)==1) bity.set(i);
+        }
+        return bity.toByteArray();
+    }
+
+    public ArrayList<Integer> getT(){return T;}
 }
+
