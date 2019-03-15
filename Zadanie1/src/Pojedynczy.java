@@ -10,14 +10,35 @@ public class Pojedynczy {
                         {1,0,1,1,0,1,0,1,0,0,1,0},
                         {0,1,1,1,1,0,1,1,0,0,0,1}};  //To jeszcze do poprawki ofc
 
+    /*rivate int H[][]={ {1,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0},
+                        {1,1,1,1,1,0,0,1,0,1,0,0,0,0,0,0},
+                        {1,1,1,1,0,0,1,1,0,0,1,0,0,0,0,0},
+                        {1,1,1,0,0,1,1,1,0,0,0,1,0,0,0,0},
+                        {1,1,0,0,1,1,1,1,0,0,0,0,1,0,0,0},
+                        {1,0,0,1,1,1,1,1,0,0,0,0,0,1,0,0},
+                        {0,0,1,1,1,1,1,1,0,0,0,0,0,0,1,0},
+                        {0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1}};*/
+
+   /*private int H[][]={{1, 1, 0, 1, 1, 1, 0, 0,   1, 0, 0, 0, 0, 0, 0, 0, 0},
+        {1, 0, 1, 0, 0, 1, 0, 1,   0, 1, 0, 0, 0, 0, 0, 0, 0},
+        {1, 0, 0, 1, 1, 0, 1, 1,   0, 0, 1, 0, 0, 0, 0, 0, 0},
+        {1, 1, 1, 1, 1, 1, 1, 1,   0, 0, 0, 1, 0, 0, 0, 0, 0},
+        {1, 1, 1, 1, 0, 0, 1, 0,   0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 1, 1, 1, 1, 0, 0,   0, 0, 0, 0, 0, 1, 0, 0, 0},
+        {1, 1, 1, 0, 1, 0, 0, 0,   0, 0, 0, 0, 0, 0, 1, 0, 0},
+        {0, 1, 0, 0, 1, 0, 1, 0,   0, 0, 0, 0, 0, 0, 0, 1, 0},
+        {0, 0, 0, 0, 1, 0,  1, 1,   0, 0, 0, 0, 0, 0, 0, 0, 1}};*/
+
     private ArrayList<Integer> T = new ArrayList<>();
     private ArrayList<Integer> E = new ArrayList<>();
     private int ArraySize;
+    private int kolumny = 12;
+    private int wiersze = 4;
 
     private int calculate_C(int r,int k){
         int c = 0;
         for(int i=0;i<8;i++){
-            c += H[r][i] * T.get(k*12+i);
+            c += H[r][i] * T.get(k*kolumny+i);
         }
         c %= 2;
         return c;
@@ -25,7 +46,7 @@ public class Pojedynczy {
 
     private int calculate_C2(int r,int k){
         int c = 0;
-        for(int i=0;i<12;i++){
+        for(int i=0;i<kolumny;i++){
             c += H[r][i] * T.get(k*8+i);
         }
         c %= 2;
@@ -35,10 +56,9 @@ public class Pojedynczy {
     public void encrypt(){
 
         for(int k=0;k<ArraySize;k++){
-            for(int i=0;i<4;i++){
+            for(int i=0;i<wiersze;i++){
                 int C = calculate_C(i,k);
-                T.add((k+1)*8+k*4+i, C);
-
+                T.add((k+1)*8+k*wiersze+i, C);
             }
         }
 
@@ -50,7 +70,7 @@ public class Pojedynczy {
         boolean theSame = false;
         //int pom = 0;
 
-        for(int i=0; i<12; i++){
+        for(int i=0; i<kolumny; i++){
             for(int j=0; j<E.size(); j++){
                 if(H[j][i] == E.get(j)){
                     theSame = true;
@@ -77,7 +97,7 @@ public class Pojedynczy {
 
         for(int k=0;k<ArraySize;k++) {
             blad = false;
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < wiersze; i++) {
                 int c = calculate_C2(i, k);
                 E.add(c);
                 if (c == 1) blad = true;
@@ -90,7 +110,7 @@ public class Pojedynczy {
             }
             E.clear();
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < wiersze; i++) {
                 T.remove((k + 1) * 8);
             }
         }
@@ -99,6 +119,8 @@ public class Pojedynczy {
     public void changeT(){
         T.remove(4);
         T.add(4,1);
+        //T.remove(5);
+        //T.add(5,1);
     }
 
 

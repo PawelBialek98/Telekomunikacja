@@ -19,7 +19,7 @@ public class Main {
         pojedynczy.BytesToVector(kod);
         pojedynczy.encrypt();
 
-        //pojedynczy.changeT();
+        pojedynczy.changeT();
         byte[] wysylka = pojedynczy.VectorToBytes();
         //file.saveToFile(out,"C:\\Users\\Łukasz\\Desktop\\wiadomosc2.txt");
         file.saveToFile(wysylka,"wiadomoscDoWysylki.txt");
