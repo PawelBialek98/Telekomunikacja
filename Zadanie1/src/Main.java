@@ -68,7 +68,7 @@ public class Main extends Application{
         });
 
         grid.getChildren().addAll(sendLabel,fileInput,buttonSend,verifyLabel, verifyInput, receiveInput, receiveLabel, buttonReceive);
-        Scene scene = new Scene(grid, 430, 250);
+        Scene scene = new Scene(grid, 480, 250);
         window.setScene(scene);
         window.show();
     }
